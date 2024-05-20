@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Все курсы</h2>
+<div class="list-group">
+    {% for course in courses %}
+        <div class="list-group-item">
+            <h5 class="mb-1">{{ course.title }}</h5>
+            <p class="mb-1">{{ course.description }}</p>
+            <small>Требуемый год обучения: {{ course.year_requirement }}</small>
+            <br>
+            <a href="{% url 'course_detail' course.pk %}" class="btn btn-primary mt-2">Подробнее</a>
+            {% if user.is_student %}
+                <a href="{% url 'enroll_course' course.pk %}" class="btn btn-success mt-2">Записаться</a>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

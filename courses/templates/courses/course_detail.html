@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ course.title }}</h2>
+<p>{{ course.description }}</p>
+<p>Требуемый год обучения: {{ course.year_requirement }}</p>
+<p>Количество уроков: {{ course.lessons_count }}</p>
+
+{% if user.is_authenticated and user.is_student and not enrolled %}
+    <a href="{% url 'enroll_course' course.pk %}" class="btn btn-primary">Записаться на курс</a>
+{% elif enrolled %}
+    <p class="text-success">Вы уже записаны на этот курс.</p>
+{% endif %}
+{% endblock %}
